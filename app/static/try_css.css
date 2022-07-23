@@ -1,0 +1,8 @@
+*{
+    margin:auto;
+    padding: 0;
+    text-align: center;
+}
+
+td{color:cyan;}
+th{color:magenta;}
