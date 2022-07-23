@@ -2,10 +2,16 @@ import os
 
 from flask import Flask, request, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from mysql_model import Person, Human
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
+flag = os.getenv('DEBUG')
+if flag == '0':
+    from mysql_model import Person, Human
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
+else:
+    from test_model import Person, Human
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI2')
+    
 app.config['PORT'] = os.getenv('PORT')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
